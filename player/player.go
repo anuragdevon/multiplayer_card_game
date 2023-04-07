@@ -1,6 +1,7 @@
 package player
 
 import (
+	"errors"
 	"fmt"
 	"multiplayer-card-game/card"
 )
@@ -26,3 +27,21 @@ func (p *Player) String() string {
 }
 
 // TODO: Handle addtion checks for playcard and invalid moves
+func (p *Player) PlayCard(index int, topCard card.Card) (card.Card, error) {
+	card := p.Hand[index]
+	if card.Suit != topCard.Suit && card.Rank != topCard.Rank {
+		return card, errors.New("Invalid Move") // TODO: change card to empty ~ 1
+	}
+
+	p.Hand = append(p.Hand[:index], p.Hand[index+1:]...)
+	return card, nil
+}
+
+func (p *Player) HasValidMove(topCard card.Card) bool {
+	for _, card := range p.Hand {
+		if card.Suit == topCard.Suit || card.Rank == topCard.Rank {
+			return true
+		}
+	}
+	return false
+}
