@@ -1,6 +1,7 @@
 package deck
 
 import (
+	"fmt"
 	"math/rand"
 	"multiplayer-card-game/card"
 	"multiplayer-card-game/player"
@@ -43,4 +44,13 @@ func (d *Deck) DrawCards(players []*player.Player) {
 			player.Hand = append(player.Hand, card)
 		}
 	}
+}
+
+// temporary method for showing deck cards
+func (d *Deck) String() string {
+	var str string
+	for _, card := range d.cards {
+		str += fmt.Sprintf("%s\n", card)
+	}
+	return str
 }
