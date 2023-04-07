@@ -7,8 +7,10 @@ import (
 )
 
 type Player struct {
-	Name string
-	Hand []card.Card
+	Name       string
+	Hand       []card.Card
+	LastPlayed card.Card // New field added to store the last card played by the player
+
 }
 
 func NewPlayer(name string) *Player {
