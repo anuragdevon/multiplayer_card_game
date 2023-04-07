@@ -1,6 +1,10 @@
 package main
 
-import "multiplayer-card-game/card"
+import (
+	"math/rand"
+	"multiplayer-card-game/card"
+	"time"
+)
 
 type Deck struct {
 	cards []card.Card
@@ -19,3 +23,15 @@ func NewDeck() *Deck {
 	}
 	return d
 }
+
+func (d *Deck) Shuffle() {
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
+	for i := len(d.cards) - 1; i > 0; i-- {
+		j := r.Intn(i + 1)
+		d.cards[i], d.cards[j] = d.cards[j], d.cards[i]
+	}
+}
+
+// TODO: Method for adding a card to players collection
