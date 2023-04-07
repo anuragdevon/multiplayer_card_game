@@ -9,7 +9,7 @@ import (
 )
 
 type Deck struct {
-	cards []card.Card
+	Cards []card.Card
 }
 
 func NewDeck() *Deck {
@@ -20,7 +20,7 @@ func NewDeck() *Deck {
 	for _, suit := range suits {
 		for _, rank := range ranks {
 			card := card.NewCard(suit, rank)
-			d.cards = append(d.cards, card)
+			d.Cards = append(d.Cards, card)
 		}
 	}
 	return d
@@ -30,17 +30,17 @@ func (d *Deck) Shuffle() {
 	source := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(source)
 
-	for i := len(d.cards) - 1; i > 0; i-- {
+	for i := len(d.Cards) - 1; i > 0; i-- {
 		j := r.Intn(i + 1)
-		d.cards[i], d.cards[j] = d.cards[j], d.cards[i]
+		d.Cards[i], d.Cards[j] = d.Cards[j], d.Cards[i]
 	}
 }
 
 func (d *Deck) DrawCards(players []*player.Player) {
 	for i := 0; i < 5; i++ {
 		for _, player := range players {
-			card, cards := d.cards[len(d.cards)-1], d.cards[:len(d.cards)-1]
-			d.cards = cards
+			card, cards := d.Cards[len(d.Cards)-1], d.Cards[:len(d.Cards)-1]
+			d.Cards = cards
 			player.Hand = append(player.Hand, card)
 		}
 	}
@@ -49,7 +49,7 @@ func (d *Deck) DrawCards(players []*player.Player) {
 // temporary method for showing deck cards
 func (d *Deck) String() string {
 	var str string
-	for _, card := range d.cards {
+	for _, card := range d.Cards {
 		str += fmt.Sprintf("%s\n", card)
 	}
 	return str

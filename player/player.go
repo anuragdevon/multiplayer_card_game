@@ -7,13 +7,13 @@ import (
 )
 
 type Player struct {
-	name string
+	Name string
 	Hand []card.Card
 }
 
 func NewPlayer(name string) *Player {
 	p := &Player{}
-	p.name = name
+	p.Name = name
 	p.Hand = make([]card.Card, 0)
 	return p
 }
