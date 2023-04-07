@@ -1,8 +1,9 @@
-package main
+package deck
 
 import (
 	"math/rand"
 	"multiplayer-card-game/card"
+	"multiplayer-card-game/player"
 	"time"
 )
 
@@ -34,4 +35,12 @@ func (d *Deck) Shuffle() {
 	}
 }
 
-// TODO: Method for adding a card to players collection
+func (d *Deck) DrawCards(players []*player.Player) {
+	for i := 0; i < 5; i++ {
+		for _, player := range players {
+			card, cards := d.cards[len(d.cards)-1], d.cards[:len(d.cards)-1]
+			d.cards = cards
+			player.Hand = append(player.Hand, card)
+		}
+	}
+}
