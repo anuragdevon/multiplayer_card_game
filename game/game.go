@@ -16,6 +16,7 @@ type Game struct {
 	ReverseOrder  bool
 	PlusTwoCount  int
 	PlusFourCount int
+	topCardIndex  int
 }
 
 func NewGame(names []string) *Game {
@@ -48,6 +49,7 @@ func (g *Game) PlayCard(index int) error {
 	p.LastPlayed = card // Store the last played card in the player's LastPlayed field
 	g.UpdateGameStatus(card)
 	g.UpdatePlayerOrder(card)
+	g.Deck.Cards = append(g.Deck.Cards, p.LastPlayed)
 
 	return nil
 }

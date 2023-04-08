@@ -28,15 +28,14 @@ func (p *Player) String() string {
 	return str
 }
 
-// TODO: Handle addtion checks for playcard and invalid moves
 func (p *Player) PlayCard(index int, topCard card.Card) (card.Card, error) {
-	card := p.Hand[index]
-	if card.Suit != topCard.Suit && card.Rank != topCard.Rank {
-		return card, errors.New("Invalid Move") // TODO: change card to empty ~ 1
+	cards := p.Hand[index]
+	if cards.Suit != topCard.Suit && cards.Rank != topCard.Rank {
+		return card.Card{}, errors.New("invalid move")
 	}
 
 	p.Hand = append(p.Hand[:index], p.Hand[index+1:]...)
-	return card, nil
+	return cards, nil
 }
 
 func (p *Player) HasValidMove(topCard card.Card) bool {
