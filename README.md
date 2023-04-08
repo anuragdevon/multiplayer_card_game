@@ -38,6 +38,9 @@ multiplayer-card-game/
 ├── player/
 │   ├── player.go
 │   └── player_test.md
+├── game/
+│   ├── game.go
+│   └── game_test.md
 ├── main.go
 └── README.md
 ```
