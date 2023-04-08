@@ -37,10 +37,10 @@ multiplayer-card-game/
 │   └── deck_test.go
 ├── player/
 │   ├── player.go
-│   └── player_test.md
+│   └── player_test.go
 ├── game/
 │   ├── game.go
-│   └── game_test.md
+│   └── game_test.go
 ├── main.go
 └── README.md
 ```
