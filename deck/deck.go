@@ -46,6 +46,19 @@ func (d *Deck) DrawCards(players []*player.Player) {
 	}
 }
 
+
+func (d *Deck) DrawCard() (*card.Card, error) {
+	if len(d.Cards) == 0 {
+		return nil, fmt.Errorf("deck is empty")
+	}
+
+	card, cards := d.Cards[len(d.Cards)-1], d.Cards[:len(d.Cards)-1]
+	d.Cards = cards
+
+	return &card, nil
+}
+
+
 // temporary method for showing deck cards
 func (d *Deck) String() string {
 	var str string

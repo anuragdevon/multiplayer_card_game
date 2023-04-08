@@ -6,17 +6,18 @@ import (
 	"multiplayer-card-game/card"
 	"multiplayer-card-game/deck"
 	"multiplayer-card-game/player"
+	"os"
 )
 
 type Game struct {
 	Deck          *deck.Deck
+	topCard       *card.Card
 	Players       []*player.Player
 	CurrentIndex  int
 	SkipCount     int
 	ReverseOrder  bool
 	PlusTwoCount  int
 	PlusFourCount int
-	topCardIndex  int
 }
 
 func NewGame(names []string) *Game {
@@ -29,8 +30,13 @@ func NewGame(names []string) *Game {
 		g.Players[i] = player.NewPlayer(name)
 	}
 	g.Deck.DrawCards(g.Players)
-
+	// Draw a top card for new game, which will be replaced later by lastplayed card
+	g.topCard, _ = g.Deck.DrawCard()
 	return g
+}
+
+func (g *Game) ReturnLastCard() card.Card {
+	return *g.topCard
 }
 
 func (g *Game) CurrentPlayer() *player.Player {
@@ -39,19 +45,25 @@ func (g *Game) CurrentPlayer() *player.Player {
 
 func (g *Game) PlayCard(index int) error {
 	p := g.CurrentPlayer()
-
-	topCard := g.TopCard()
+	topCard := g.ReturnLastCard()
 	card, err := p.PlayCard(index, topCard)
 	if err != nil {
-		return err
+		if len(g.Deck.Cards) == 0 {
+			fmt.Print("draw pile is empty, game ends in a draw")
+			os.Exit(0)
+		}
+
+		card, cards := g.Deck.Cards[len(g.Deck.Cards)-1], g.Deck.Cards[:len(g.Deck.Cards)-1]
+		g.Deck.Cards = cards
+		p.Hand = append(p.Hand, card)
 	}
 
 	p.LastPlayed = card // Store the last played card in the player's LastPlayed field
 	g.UpdateGameStatus(card)
 	g.UpdatePlayerOrder(card)
-	g.Deck.Cards = append(g.Deck.Cards, p.LastPlayed)
-
-	return nil
+	// g.Deck.Cards = append(g.Deck.Cards, p.LastPlayed)
+	g.topCard = &p.LastPlayed
+	return err
 }
 
 func (g *Game) UpdateGameStatus(card card.Card) {

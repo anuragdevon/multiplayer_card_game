@@ -31,7 +31,7 @@ func (p *Player) String() string {
 func (p *Player) PlayCard(index int, topCard card.Card) (card.Card, error) {
 	cards := p.Hand[index]
 	if cards.Suit != topCard.Suit && cards.Rank != topCard.Rank {
-		return card.Card{}, errors.New("invalid move")
+		return card.Card{}, errors.New("not a valid move, has to pick a card")
 	}
 
 	p.Hand = append(p.Hand[:index], p.Hand[index+1:]...)
