@@ -1,13 +1,12 @@
-package test
+package player
 
 import (
 	"multiplayer-card-game/card"
-	"multiplayer-card-game/player"
 	"testing"
 )
 
 func TestNewPlayer(t *testing.T) {
-	p := player.NewPlayer("Alice")
+	p := NewPlayer("Alice")
 	if p.Name != "Alice" {
 		t.Errorf("Expected name to be 'Alice', but got '%s'", p.Name)
 	}
@@ -18,7 +17,7 @@ func TestNewPlayer(t *testing.T) {
 }
 
 func TestPlayerString(t *testing.T) {
-	p := player.NewPlayer("Bob")
+	p := NewPlayer("Bob")
 	p.Hand = append(p.Hand, card.NewCard("Hearts", "Ace"))
 	p.Hand = append(p.Hand, card.NewCard("Diamonds", "King"))
 
@@ -29,7 +28,7 @@ func TestPlayerString(t *testing.T) {
 }
 
 func TestPlayCard(t *testing.T) {
-	p := player.NewPlayer("Charlie")
+	p := NewPlayer("Charlie")
 	p.Hand = append(p.Hand, card.NewCard("Spades", "10"))
 	p.Hand = append(p.Hand, card.NewCard("Hearts", "Jack"))
 

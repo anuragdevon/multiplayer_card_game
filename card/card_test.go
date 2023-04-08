@@ -1,14 +1,14 @@
-package test
+package card
 
 import (
-	"multiplayer-card-game/card"
+	// "multiplayer-card-game/card"
 	"testing"
 )
 
 func TestNewCard(t *testing.T) {
 	suit := "Spades"
 	rank := "Ace"
-	c := card.NewCard(suit, rank)
+	c := NewCard(suit, rank)
 	if c.Suit != suit {
 		t.Errorf("Expected suit to be %s, but got %s", suit, c.Suit)
 	}
@@ -18,7 +18,7 @@ func TestNewCard(t *testing.T) {
 }
 
 func TestCardString(t *testing.T) {
-	c := card.Card{Suit: "Diamonds", Rank: "10"}
+	c := Card{Suit: "Diamonds", Rank: "10"}
 	expected := "10 of Diamonds"
 	if c.String() != expected {
 		t.Errorf("Expected card string to be %s, but got %s", expected, c.String())

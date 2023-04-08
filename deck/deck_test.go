@@ -1,14 +1,13 @@
-package test
+package deck
 
 import (
 	"multiplayer-card-game/card"
-	"multiplayer-card-game/deck"
 	"multiplayer-card-game/player"
 	"testing"
 )
 
 func TestNewDeck(t *testing.T) {
-	d := deck.NewDeck()
+	d := NewDeck()
 
 	expectedCardCount := 52
 	if len(d.Cards) != expectedCardCount {
@@ -17,7 +16,7 @@ func TestNewDeck(t *testing.T) {
 }
 
 func TestShuffle(t *testing.T) {
-	d := deck.NewDeck()
+	d := NewDeck()
 	originalCards := make([]card.Card, len(d.Cards))
 	copy(originalCards, d.Cards)
 
@@ -33,7 +32,7 @@ func TestShuffle(t *testing.T) {
 }
 
 func TestDrawCards(t *testing.T) {
-	d := deck.NewDeck()
+	d := NewDeck()
 	p1 := player.NewPlayer("Player 1")
 	p2 := player.NewPlayer("Player 2")
 	players := []*player.Player{p1, p2}
@@ -56,7 +55,7 @@ func TestDrawCards(t *testing.T) {
 }
 
 func TestDrawCard(t *testing.T) {
-	d := deck.NewDeck()
+	d := NewDeck()
 
 	// Draw 52 cards from the deck
 	for i := 0; i < 52; i++ {

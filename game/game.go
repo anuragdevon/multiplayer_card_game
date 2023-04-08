@@ -67,8 +67,6 @@ func (g *Game) PlayCard(index int) error {
 	p.LastPlayed = topCard // Store the last played card in the player's LastPlayed field
 	g.UpdateGameStatus(topCard)
 	g.UpdatePlayerOrder(topCard)
-	// g.Deck.Cards = append(g.Deck.Cards, p.LastPlayed)
-	// g.topCard = &p.LastPlayed
 	return err
 }
 
