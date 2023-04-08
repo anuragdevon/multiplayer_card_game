@@ -16,17 +16,6 @@ func TestNewPlayer(t *testing.T) {
 	}
 }
 
-func TestPlayerString(t *testing.T) {
-	p := NewPlayer("Bob")
-	p.Hand = append(p.Hand, card.NewCard("Hearts", "Ace"))
-	p.Hand = append(p.Hand, card.NewCard("Diamonds", "King"))
-
-	expectedStr := "Ace of Hearts\nKing of Diamonds\n"
-	if p.String() != expectedStr {
-		t.Errorf("Expected string representation to be '%s', but got '%s'", expectedStr, p.String())
-	}
-}
-
 func TestPlayCard(t *testing.T) {
 	p := NewPlayer("Charlie")
 	p.Hand = append(p.Hand, card.NewCard("Spades", "10"))

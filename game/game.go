@@ -49,7 +49,9 @@ func (g *Game) PlayCard(index int) error {
 	card, err := p.PlayCard(index, topCard)
 	if err != nil {
 		if len(g.Deck.Cards) == 0 {
-			fmt.Print("draw pile is empty, game ends in a draw")
+			fmt.Print("=======================================\n")
+			fmt.Print("draw pile is empty, game ends in a draw\n")
+			fmt.Print("=======================================\n")
 			os.Exit(0)
 		}
 
@@ -150,14 +152,4 @@ func (g *Game) Winner() (*player.Player, error) {
 		}
 	}
 	return winner, nil
-}
-
-func (g *Game) String() string {
-	var str string
-	for _, player := range g.Players {
-		str += fmt.Sprintf("%s: %s\n", player, player.Hand)
-	}
-	str += fmt.Sprintf("Top card: %s\n", g.TopCard())
-	str += fmt.Sprintf("Current player: %s\n", g.CurrentPlayer().Name)
-	return str
 }

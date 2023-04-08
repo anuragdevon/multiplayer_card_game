@@ -46,7 +46,6 @@ func (d *Deck) DrawCards(players []*player.Player) {
 	}
 }
 
-
 func (d *Deck) DrawCard() (*card.Card, error) {
 	if len(d.Cards) == 0 {
 		return nil, fmt.Errorf("deck is empty")
@@ -56,14 +55,4 @@ func (d *Deck) DrawCard() (*card.Card, error) {
 	d.Cards = cards
 
 	return &card, nil
-}
-
-
-// temporary method for showing deck cards
-func (d *Deck) String() string {
-	var str string
-	for _, card := range d.Cards {
-		str += fmt.Sprintf("%s\n", card)
-	}
-	return str
 }

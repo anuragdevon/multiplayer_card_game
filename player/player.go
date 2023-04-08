@@ -2,7 +2,6 @@ package player
 
 import (
 	"errors"
-	"fmt"
 	"multiplayer-card-game/card"
 )
 
@@ -18,14 +17,6 @@ func NewPlayer(name string) *Player {
 	p.Name = name
 	p.Hand = make([]card.Card, 0)
 	return p
-}
-
-func (p *Player) String() string {
-	var str string
-	for _, card := range p.Hand {
-		str += fmt.Sprintf("%s\n", card)
-	}
-	return str
 }
 
 func (p *Player) PlayCard(index int, topCard card.Card) (card.Card, error) {

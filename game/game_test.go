@@ -14,7 +14,6 @@ func TestNewGame(t *testing.T) {
 		t.Errorf("Deck is not shuffled")
 	}
 
-	// Check if all players are created and have 7 cards
 	for _, player := range game.Players {
 		if len(player.Hand) != 5 {
 			t.Errorf("Player does not have 5 cards in hand")
