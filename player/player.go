@@ -8,8 +8,7 @@ import (
 type Player struct {
 	Name       string
 	Hand       []card.Card
-	LastPlayed card.Card // New field added to store the last card played by the player
-
+	LastPlayed card.Card
 }
 
 func NewPlayer(name string) *Player {
@@ -20,6 +19,9 @@ func NewPlayer(name string) *Player {
 }
 
 func (p *Player) PlayCard(index int, topCard card.Card) (card.Card, error) {
+	if index < 0 || index >= len(p.Hand) {
+		return card.Card{}, errors.New("invalid index")
+	}
 	cards := p.Hand[index]
 	if cards.Suit != topCard.Suit && cards.Rank != topCard.Rank {
 		return card.Card{}, errors.New("not a valid move, has to pick a card")

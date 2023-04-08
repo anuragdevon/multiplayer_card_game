@@ -69,6 +69,8 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error: %s\n", err)
 	} else {
+		fmt.Print("============================================\n")
 		fmt.Printf("Game over! %s wins!\n", winner.Name)
+		fmt.Print("============================================\n")
 	}
 }

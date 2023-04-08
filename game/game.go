@@ -48,6 +48,9 @@ func (g *Game) PlayCard(index int) error {
 	topCard := g.ReturnLastCard()
 	card, err := p.PlayCard(index, topCard)
 	if err != nil {
+		if err.Error() == "invalid index" {
+			return err
+		}
 		if len(g.Deck.Cards) == 0 {
 			fmt.Print("=======================================\n")
 			fmt.Print("draw pile is empty, game ends in a draw\n")
@@ -58,14 +61,10 @@ func (g *Game) PlayCard(index int) error {
 		newCard, Newcards := g.Deck.Cards[len(g.Deck.Cards)-1], g.Deck.Cards[:len(g.Deck.Cards)-1]
 		g.Deck.Cards = Newcards
 		p.Hand = append(p.Hand, newCard)
-		fmt.Print("Continued card is ...")
 	} else {
 		g.topCard = &card
-		fmt.Print("Played Card is...")
 	}
 	topCard = g.ReturnLastCard()
-	fmt.Print(topCard)
-	fmt.Print("\n")
 	p.LastPlayed = topCard // Store the last played card in the player's LastPlayed field
 	g.UpdateGameStatus(topCard)
 	g.UpdatePlayerOrder(topCard)
