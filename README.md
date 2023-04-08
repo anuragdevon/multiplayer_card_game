@@ -45,6 +45,6 @@ multiplayer-card-game/
 ## Testing
 To run the tests for the project, run the following command from the project directory:
 
-go test ./...
+go test -v ./...
 
 This command will run all the tests in the project.
