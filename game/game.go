@@ -53,16 +53,22 @@ func (g *Game) PlayCard(index int) error {
 			os.Exit(0)
 		}
 
-		card, cards := g.Deck.Cards[len(g.Deck.Cards)-1], g.Deck.Cards[:len(g.Deck.Cards)-1]
-		g.Deck.Cards = cards
-		p.Hand = append(p.Hand, card)
+		newCard, Newcards := g.Deck.Cards[len(g.Deck.Cards)-1], g.Deck.Cards[:len(g.Deck.Cards)-1]
+		g.Deck.Cards = Newcards
+		p.Hand = append(p.Hand, newCard)
+		fmt.Print("Continued card is ...")
+	} else {
+		g.topCard = &card
+		fmt.Print("Played Card is...")
 	}
-
-	p.LastPlayed = card // Store the last played card in the player's LastPlayed field
-	g.UpdateGameStatus(card)
-	g.UpdatePlayerOrder(card)
+	topCard = g.ReturnLastCard()
+	fmt.Print(topCard)
+	fmt.Print("\n")
+	p.LastPlayed = topCard // Store the last played card in the player's LastPlayed field
+	g.UpdateGameStatus(topCard)
+	g.UpdatePlayerOrder(topCard)
 	// g.Deck.Cards = append(g.Deck.Cards, p.LastPlayed)
-	g.topCard = &p.LastPlayed
+	// g.topCard = &p.LastPlayed
 	return err
 }
 
