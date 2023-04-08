@@ -58,7 +58,7 @@ func TestPlayCard(t *testing.T) {
 
 	// Attempt to play a card that doesn't match the top card
 	err = g.PlayCard(1)
-	if err != nil {
+	if err == nil {
 		t.Errorf("player played an invalid card")
 	}
 
