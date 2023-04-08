@@ -37,12 +37,3 @@ func (p *Player) PlayCard(index int, topCard card.Card) (card.Card, error) {
 	p.Hand = append(p.Hand[:index], p.Hand[index+1:]...)
 	return cards, nil
 }
-
-func (p *Player) HasValidMove(topCard card.Card) bool {
-	for _, card := range p.Hand {
-		if card.Suit == topCard.Suit || card.Rank == topCard.Rank {
-			return true
-		}
-	}
-	return false
-}
